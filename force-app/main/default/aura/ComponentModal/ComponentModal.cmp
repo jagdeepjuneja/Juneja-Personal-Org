@@ -1,0 +1,30 @@
+<aura:component >
+	<aura:attribute access="PUBLIC" name="show" type="Boolean" default="false"/>    
+    <aura:registerEvent name="passMethod" type="c:EVTPassMethod"/>
+    
+    <div class="slds">
+        <aura:if isTrue="{!v.show}">
+            <div role="dialog" tabindex="-1" aria-labelledby="header43" class="slds-modal slds-fade-in-open">
+              <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                  <button onclick="{!c.onCloseClick}"  class="slds-button slds-modal__close slds-button--icon-inverse" title="Close">
+                    <lightning:icon iconName="utility:close" size="small" alternativeText="Close"/>               
+                  </button>
+                  <h2 id="header43" class="slds-text-heading--medium">Click Me</h2>
+                </div>
+                <div class="slds-modal__content slds-p-around--medium">
+                  <div  class="slds-align--absolute-center">
+                      <button onclick="{!c.onChildButtonClick}" class="slds-button slds-button--neutral">
+                    	  Pass Value and Fire Parent Method
+                  	  </button>	
+                  </div>
+                </div>
+                <div class="slds-modal__footer">
+                  <button onclick="{!c.onCloseClick}" class="slds-button slds-button--neutral">Cancel</button>                 
+                </div>
+              </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop--open"></div>
+        </aura:if>
+    </div>
+</aura:component>

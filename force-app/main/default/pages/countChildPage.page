@@ -1,0 +1,5 @@
+<apex:page standardController="Account" extensions="countChildsController">
+  <apex:form >
+    <apex:outputText label="Child contacts size" value="{!contactListSize}" />
+  </apex:form>
+</apex:page>

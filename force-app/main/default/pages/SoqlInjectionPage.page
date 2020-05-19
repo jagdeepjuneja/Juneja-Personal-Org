@@ -1,0 +1,13 @@
+<apex:page controller="SoqlInjectionPageController" >
+    <apex:form id="formId">
+        <apex:outputText value="Enter Name" />
+        <apex:inputText value="{!name}" />
+        <apex:pageBlock >
+          <apex:pageBlockTable value="{!conList}" var="con">
+            {!con.Name}
+          </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        <apex:commandButton value="Query" action="{!query}" reRender="formId" />
+    </apex:form>
+</apex:page>

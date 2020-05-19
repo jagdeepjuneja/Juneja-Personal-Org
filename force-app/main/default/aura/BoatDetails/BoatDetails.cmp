@@ -1,0 +1,68 @@
+<aura:component implements="force:appHostable,flexiPage:AvailableForAllPageTypes">
+    <aura:attribute type="Boat__c" name="boat" access="public" />
+    <aura:attribute name="recordError" type="String" access="private" />
+    
+    <aura:handler event="c:BoatSelected" action="{!c.onBoatSelected}" />
+    
+    <aura:handler event="c:BoatReviewAdded" name="boatReviewAdded" action="{!c.onBoatReviewAdded}" />
+    
+    <aura:attribute type="Id" name="Id" access="public" />
+    
+    <aura:attribute type="Id" name="tabId" access="public" />
+    
+    <force:recordData aura:id="service"
+                      recordId = "{!v.Id}"
+                      mode="VIEW"
+                      targetFields="{!v.boat}"
+                      targetError = "{!v.recordError}"
+                      recordUpdated ="{!c.onRecordUpdated}"
+                      fields="Id, Name, Description__c,  Length__c, Price__c, Year_Built__c, Contact__r.Name,
+                              Contact__r.Email, Contact__r.HomePhone, BoatType__r.Name, Picture__c"
+                      />
+    <lightning:layout multiplerows="true">
+        <lightning:layoutItem size="12"
+                              smallDeviceSize="12"
+                              mediumDeviceSize="12"
+                              largeDeviceSize="12">
+            
+            <aura:if isTrue="{!not(empty(v.boat))}">
+                <!--<lightning:tabset aura:id="tabs" selectedTabId = "{!v.tabId}">
+                    <lightning:tab label="DETAILS" id="boatdetailtab">
+                        <c:BoatDetail boat="{!v.boat}" />
+                    </lightning:tab>
+                    
+                    <lightning:tab label="REVIEWS" id="boatexp">
+                        <c:BoatReviews aura:id="boatexpId" boat="{!v.boat}" />
+                    </lightning:tab>
+                    
+                    
+                    <lightning:tab label="ADD REVIEW" id="addexptab">
+                        <c:AddBoatReview boat="{!v.boat}" />
+                    </lightning:tab>
+                    
+                </lightning:tabset>-->
+                <lightning:tabset variant="scoped" selectedTabId="{!v.selectedTabId}" aura:id="details">
+                    <lightning:tab label="Details" id="details" >
+                        
+                            <c:BoatDetail boat="{!v.boat}" />
+                            
+                        
+                    </lightning:tab>
+                    <lightning:tab label="Reviews" id="boatreviewtab" >
+                        
+                        
+                            <c:BoatReviews boat="{!v.boat}"  aura:id="BRcmp"/> 
+                        
+                    </lightning:tab>
+                    <lightning:tab label="Add Review" id="addReview" >
+                        
+                            <c:AddBoatReview boat="{!v.boat}"/> 
+                        
+                    </lightning:tab>
+                </lightning:tabset>
+            </aura:if>
+            
+        </lightning:layoutItem>
+        
+    </lightning:layout>
+</aura:component>

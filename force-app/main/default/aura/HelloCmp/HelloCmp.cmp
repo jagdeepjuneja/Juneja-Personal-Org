@@ -1,0 +1,7 @@
+<aura:component implements="force:appHostable" >
+    <aura:attribute name="message" type="string" default="Lightning" />
+    
+    <div class="slds-box slds-theme-success slds-align-absolute-center ">
+    Hello {!v.message}
+    </div>
+</aura:component>

@@ -1,0 +1,30 @@
+<apex:page controller="CommonController">
+    <apex:form >
+        <apex:pageMessages id="showmsg"></apex:pageMessages>
+        <script>
+            function myJavascriptFunc(){
+                var count = '{!count}';
+                if(count < 1){
+                    CallApexMethod() ;    
+                }
+                else{
+                    //alert('Validation alert');   
+                    CallApexMethod2() ;    
+                }
+            }
+        </script>
+        <apex:actionFunction name="CallApexMethod" action="{!moveToPageTwo}" />
+        <apex:actionFunction name="CallApexMethod2" action="{!tempMethod}" rerender="showmsg" />
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:inputField value="{!acc.Name}" />
+                <apex:pageBlockSectionItem />
+                Count Is <apex:outputText value="{!count}" />
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Next Page" onclick="myJavascriptFunc();return false" rerender="showmsg"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

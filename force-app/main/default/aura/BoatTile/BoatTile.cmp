@@ -1,0 +1,23 @@
+<aura:component implements="flexipage:availableForAllPageTypes"  >
+	<aura:attribute name="boat" type="Boat__c" access="public" 
+                    default="{
+                             'sObjectType' : 'Boat__c',
+                             'Name' : 'Jagdeep',
+                             'Picture__c' : '/resource/boats/luxury/ford_mustang.jpeg'
+                             }" />
+    <aura:attribute name="selected" type="boolean" default="false" access="public"  />
+    
+    <aura:registerEvent name="onBoatSelect" type="c:boatSelect"/>
+    <aura:registerEvent name="BoatSelected" type="c:BoatSelected" />
+    <aura:registerEvent name="plotMapMarker" type="c:PlotMapMarker" />
+    
+    
+    <lightning:button variant="neutral" class="{! v.selected ? 'tile selected' : 'tile'}" onclick="{!c.onBoatClick}">
+        {!v.boat.Picture__c}
+    	<div style="{# 'background-image:url(' + v.boat.Picture__c + ')' }" class="innerTile">
+            <div class="lower-third">
+                <h1 class="slds-truncate" >{!v.boat.Contact__r.Name}</h1>
+            </div>
+        </div>
+    </lightning:button>
+</aura:component>

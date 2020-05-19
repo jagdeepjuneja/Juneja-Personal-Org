@@ -1,0 +1,19 @@
+<apex:page standardController="Contact" recordSetVar="var">
+    <apex:includeLightning />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+	<script>
+        $Lightning.use("c:sendEmailApplication", function() {
+            $Lightning.createComponent(
+                "c:sendEmailComponent",
+                {
+                   "recordId" : "{!$CurrentPage.parameters.id}"
+                },
+                "theContact",
+                function(cmp) {
+                    console.log("Component created!");
+                    console.log(cmp);
+                });
+            });
+    </script>
+    <div id="theContact"></div>
+</apex:page>

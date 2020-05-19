@@ -1,0 +1,33 @@
+<!-- SFSE question. This compoent is used to save radio button value to field in database. 
+https://salesforce.stackexchange.com/questions/239278/lightning-data-service-change-boolean
+  -->
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,force:hasSObjectName">
+    
+    <aura:attribute name="record" type="Object"/>
+    <aura:attribute name="caseRecord" type="Object"/>
+    <aura:attribute name="recordError" type="String"/>
+    <aura:attribute name="options" type="List" default="[{'label': 'Yes', 'value':true},
+                                                        {'label': 'No', 'value': false}]"/>
+    
+    <aura:attribute name="value" type="String" default="option1"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      layoutType="FULL"
+                      recordId="{!v.recordId}"
+                      targetRecord="{!v.record}"
+                      targetFields="{!v.caseRecord}"
+                      targetError="{!v.recordError}"
+                      fields="Name, Id, fieldToChange__c"
+                      mode="EDIT"
+                      recordUpdated="{!c.handleRecordUpdated}"
+                      />    
+    <lightning:radioGroup 
+                          name="q14"    
+                          aura:id="question14"    
+                          label="change value"
+                          options="{!v.options}"
+                          value="{! v.value }"
+                          type="radio"
+                          />
+    <lightning:button label="Save Account" variant="brand" onclick="{!c.handleSaveRecord}" />
+</aura:component>

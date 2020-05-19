@@ -1,0 +1,34 @@
+<apex:page controller="AccountOppPageController">
+<apex:form id="formId">
+    <apex:actionFunction name="refreshOppList" action="{!refreshOppList}" rerender="panel1,panel2,formId" status="loadingStatus" />
+    
+        <apex:outputPanel >                      
+            <apex:actionStatus id="loadingStatus" >
+                <apex:facet name="start" >
+                    <img src="/img/loading.gif" />                    
+                </apex:facet>
+            </apex:actionStatus>
+        </apex:outputPanel> 
+    
+        <apex:outputPanel id="panel1">   
+            <apex:pageBlock title="Select any Account" >    
+                <apex:selectRadio value="{!selectedAccount}" onclick="refreshOppList();" layout="pageDirection"  >
+                    <apex:selectOptions value="{!selectOptionList}"/>
+                </apex:selectRadio>
+            </apex:pageBlock>
+        </apex:outputPanel>
+    
+        <apex:outputPanel id="panel2" > 
+            <apex:pageblock title="Opportunities related to above selected account" rendered="{!listOfOpportunities.size>0}">
+                <apex:pageBlockTable value="{!listOfOpportunities}" var="opp" id="table">
+                   <apex:column value="{!opp.Name}" />
+                   <apex:column value="{!opp.AccountId}" />
+                   <apex:column value="{!opp.Amount}" />
+                   <apex:column value="{!opp.CloseDate}" />
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:outputPanel>
+        
+</apex:form>
+
+</apex:page>

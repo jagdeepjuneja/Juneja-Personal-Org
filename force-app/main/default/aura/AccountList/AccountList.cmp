@@ -1,0 +1,15 @@
+<aura:component controller="AccountListApexController">
+    <aura:attribute name="accounts" type="Account[]" />
+    <aura:handler name="init" value="this" action="{!c.doInit}" />
+    
+    <table class="cards">
+    	<aura:iteration items="{!v.accounts}" var="acc" >
+        	<tr>
+            	<td>
+            		<ui:outputText value="{!acc.Name}" />
+                </td>
+            </tr>    
+            
+        </aura:iteration>
+    </table>
+</aura:component>

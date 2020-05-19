@@ -1,0 +1,4 @@
+<aura:component controller="soqlApexController">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <ui:inputSelect label="Select object:" class="dynamic" aura:id="InputSelectDynamic"/>
+</aura:component>

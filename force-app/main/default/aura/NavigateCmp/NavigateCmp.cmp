@@ -1,0 +1,7 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes">
+    <aura:attribute name="url" type="String"/>
+    <aura:attribute name="pageReference" type="Object"/>
+   
+    <lightning:navigation aura:id="navService"/>
+    <lightning:button label = "Go to Account List View" onclick="{!c.onClick}" />
+</aura:component>

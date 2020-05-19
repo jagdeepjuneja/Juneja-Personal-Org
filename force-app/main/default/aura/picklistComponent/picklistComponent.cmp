@@ -1,0 +1,19 @@
+<aura:component controller="picklistLtngCompController" implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="showFieldTable" type="boolean" default="false" />
+    <aura:attribute name="objectList" type="String[]"/>
+    <aura:attribute name="fieldList" type="String[]"/>
+    
+    <ui:inputSelect label="Select Object" change="{!c.onPicklistChange}" >
+            <aura:iteration items="{!v.objectList}" var="obj"> 
+                <ui:inputSelectOption text="{!obj}"/> 
+            </aura:iteration>            
+    </ui:inputSelect>
+    
+    <ui:inputSelect label="Select Field"  >
+            <aura:iteration items="{!v.fieldList}" var="f"> 
+                <ui:inputCheckbox aura:id="checkbox" label="test"/>
+                <ui:inputSelectOption text="{!f}"/> 
+            </aura:iteration>            
+    </ui:inputSelect>
+</aura:component>

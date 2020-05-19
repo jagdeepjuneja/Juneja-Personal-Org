@@ -1,0 +1,8 @@
+<aura:component >
+    <aura:attribute name="show" type="Boolean" default="false" />
+    <aura:attribute name="displayMessage" type="String" default="Placeholder to show message from child component" />
+    
+    <button onclick="{!c.onButtonClick}" >Show Child Component</button>
+    
+    {!v.displayMessage}
+</aura:component>

@@ -1,0 +1,17 @@
+<apex:page >
+    <apex:includeLightning />
+    <apex:includeScript value="/lightning/lightning.out.js" />
+	<script>
+        $Lightning.use("c:accRecordsApplication", function() {
+            $Lightning.createComponent(
+                "c:accRecordsComponent",
+                {},
+                "theContact",
+                function(cmp) {
+                    console.log("Component created!");
+                    console.log(cmp);
+                });
+            });
+    </script>
+    <div id="theContact"></div>
+</apex:page>

@@ -1,0 +1,21 @@
+<apex:page controller="fiboPageClass">
+  <apex:form id="formId">
+    <apex:pageBlock >
+      <apex:pageBlockSection >
+        <apex:pageBlockSectionItem >
+          <apex:inputText value="{!fiboNumber}" />
+        </apex:pageBlockSectionItem>
+        
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockButtons >
+        <apex:commandButton value="Get list" action="{!getSequence}" rerender="result,formId"/>
+      </apex:pageBlockButtons>
+      
+      <apex:pageBlockSection id="outputBlock">
+        <apex:outputText value="{!result}" />
+      </apex:pageBlockSection>
+      
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

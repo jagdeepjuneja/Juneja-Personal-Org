@@ -1,0 +1,24 @@
+<apex:page standardController="Contact" extensions="ContactComponentApexController">
+  <apex:sectionHeader help="https://help.salesforce.com/articleView?id=co_edit.htm&siteLang=en_US&type=0"></apex:sectionHeader>
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    <apex:form >
+    <apex:includeLightning />
+	<div id="lightning" />
+	<script>
+        $Lightning.use("c:TestApp", function() {
+          $Lightning.createComponent("c:ContactComponent",
+          { conId : "{!Contact.Id}" },
+          "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+    </script>
+        <apex:pageBlock >
+            <apex:pageBlockButtons location="bottom" >
+              <apex:commandButton value="Send Email form Visualforce" action="{!testMethod123}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+        
+        </apex:form>
+</apex:page>

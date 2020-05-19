@@ -1,0 +1,14 @@
+<aura:component implements="force:appHostable">
+	<aura:attribute name="order" type="Order" default="{'sobjectType':'Order'}" />
+    
+	<ui:inputText aura:id="orderName" label="Order Name" value="{!v.order.Name}" required="true"/>
+	<br></br>
+    <ui:inputText aura:id="accName" label="Account Name" value="{!v.order.subject}" required="true"/>
+    <br></br>
+    <ui:inputSelect aura:Id="status" multiple="false" label="Status" value="{!v.order.status}">
+        <ui:inputSelectOption text="Draft" label="Draft" value="true"/>
+        <ui:inputSelectOption text="Submitted" label="Submitted" />
+	</ui:inputSelect><br></br>
+    
+    <ui:button label="Create Order" press="{!c.createTask}" />
+</aura:component>

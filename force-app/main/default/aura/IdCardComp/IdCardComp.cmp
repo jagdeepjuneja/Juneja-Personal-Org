@@ -1,0 +1,17 @@
+<aura:component >
+    <aura:attribute name="IdCardHeading" type="Aura.Component[]" />
+    <aura:attribute name="image" type="Aura.Component[]" />
+    <aura:attribute name="name" type="Aura.Component[]" />
+    <aura:attribute name="idCardNumber" type="Aura.Component[]" />
+    
+    <div>
+        <span style='margin-left:600px'>{!v.IdCardHeading}</span><br></br>
+        <span >{!v.image}</span><br></br>
+        <span style='margin-left:500px'>{!v.name}</span>
+        <span style='margin-left:70px'>{!v.idCardNumber}</span>
+        <span>{!v.body}</span>
+    </div>
+    
+    
+
+</aura:component>

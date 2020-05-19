@@ -1,0 +1,6 @@
+<aura:component controller="ContactComponentApexController" access="GLOBAL">
+    <aura:attribute name="conId" type="String" default="" />
+    
+    <!--<ui:inputText aura:id="conId" label="Contact Id" value="{!v.con.Id}" />-->
+    <ui:button label="Send Email from Component" press="{!c.sendEmailToContact}" />
+</aura:component>

@@ -1,0 +1,9 @@
+<aura:component >
+    <aura:attribute name="expense" type="Expense__c" />
+    
+    Name <ui:inputText value="{!v.expense.Name}" />
+    Amount <ui:inputNumber value="{!v.expense.Amount__c}" />
+    Client <ui:inputText value="{!v.expense.Client__c}" />
+    Date <ui:inputDate value="{!v.expense.Date__c}" />
+    Reimbursed <ui:inputcheckBox value="{!v.expense.Reimbursed__c}" />
+</aura:component>

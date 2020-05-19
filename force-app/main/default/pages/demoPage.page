@@ -1,0 +1,21 @@
+<apex:page >
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  
+  <apex:form id="formId">
+    <apex:outputPanel title="Panel heading"  id="panelId">
+      <apex:pageBlock >
+        <apex:pageBlockButtons location="bottom">
+                  <apex:commandButton value="Hide Panel" onclick="buttonClick();return false;"  rerender="panelId,formId" />
+        </apex:pageBlockButtons>
+      </apex:pageBlock>      
+    </apex:outputPanel>
+  </apex:form>
+  
+  <script type="text/javascript">
+    function buttonClick(){
+      var fld =  document.getElementById("{!$Component.formId}");
+      fld.style.visibility = 'hidden';
+    }
+  </script>
+  
+</apex:page>

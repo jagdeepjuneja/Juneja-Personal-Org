@@ -1,0 +1,33 @@
+<apex:page controller="batchtest1">
+<apex:form >
+    <apex:sectionHeader title="Dynamic Batches"/>
+    <apex:pageBlock title="Available Jobs ({!batches.size})" id="pb1">
+        <apex:pageBlockTable value="{!batches}" var="b">
+            <apex:column width="75px">
+                <center><apex:commandButton value="Submit" action="{!b.submitBatch}" reRender="pb1" style="padding:2px 6px;"/></center>
+                <apex:actionPoller rendered="{!b.pollingActive = true}" action="{!b.updateBatch}" reRender="pb1" interval="5"/>
+            </apex:column>
+            <apex:column headerValue="Job Name" width="300px">
+                {!b.batch.Name}
+            </apex:column>
+            <apex:column headerValue="Batch Size">
+                <apex:inputText value="{!b.batchSize}" style="width:50px;"/>
+            </apex:column>
+            <apex:column headerValue="Status">
+                <apex:outputText rendered="{!b.job = null}">
+                    <span style="font-style:italic;color:red;">Not started</span>
+                </apex:outputText>
+                <apex:outputText rendered="{!b.job != null}">
+                    {!b.job.Status}
+                </apex:outputText>
+            </apex:column>
+            <apex:column headerValue="Started">
+                <apex:outputField value="{!b.job.CreatedDate}"/>
+            </apex:column>
+            <apex:column headerValue="Completed">
+                <apex:outputField value="{!b.job.CompletedDate}"/>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

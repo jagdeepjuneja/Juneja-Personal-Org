@@ -1,0 +1,9 @@
+<aura:component >
+    <aura:registerEvent name="simpleEvent" type="c:SampleLightningEvent" />
+    <aura:handler name="simpleEvent" action="{!c.handleSimpleEvent}" />
+    
+    <aura:attribute name="someMessage" type="String" default="nothing fired yet" />
+    
+    <ui:button label="Click me to fire the event" press="{!c.handleClick}"/>
+    Was the event fired {!v.someMessage}
+</aura:component>

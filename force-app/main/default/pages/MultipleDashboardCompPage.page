@@ -1,0 +1,10 @@
+<!--<apex:page showHeader="false" sidebar="false">
+ <apex:iframe src="/01Z6F000001EA31" scrolling="true" id="theIframe"/>  
+ </apex:page>-->
+ <!--<apex:page >
+      <analytics:reportChart  developerName="Cases_Dashboard"  ></analytics:reportChart>
+</apex:page>-->
+
+<apex:page showheader="false" sidebar="false">
+<apex:iframe src="/01Z6F000001EA3D?isdtp=nv" scrolling="true" height="1000px" width="100%"/>
+</apex:page>

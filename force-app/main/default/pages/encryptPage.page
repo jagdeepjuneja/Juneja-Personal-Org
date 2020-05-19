@@ -1,0 +1,27 @@
+<apex:page standardController="Position__c" extensions="encryptClass">
+  <apex:form >
+    
+    <script >
+      function JSMethod(){
+        //alert('hello');
+        //var fld =  document.getElementById("j_id0:j_id1:j_id3:j_id4:formId").innerHTML;
+        //alert('fld is '+fld);
+      }
+    </script>
+    
+    <apex:pageBlock >
+      <apex:pageBlockSection >
+        <apex:outputField value="{!Position__c.Salary__c}" id="formId"/>
+        <apex:inputField value="{!pos.Hiring_Manager__c}">
+          <apex:actionSupport action="{!onLookupChange}" event="onchange"></apex:actionSupport>
+        </apex:inputField>
+      </apex:pageBlockSection>
+      
+      
+      
+      <apex:pageBlockButtons >
+        <apex:commandButton onclick="JSMethod()" action="{!save}" value="Save"/>
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

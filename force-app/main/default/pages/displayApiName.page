@@ -1,0 +1,21 @@
+<apex:page controller="displayApiNamesController" title="Get API Of Objects">   
+    <apex:form >
+        <apex:pageBlock title="">
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton value="Get API Names" action="{!getApiNames}" ></apex:commandButton>
+                <apex:commandButton value="Clear" action="{!clearBox}" ></apex:commandButton>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputText >Enter Comma Separated Labels</apex:outputText>
+                    <apex:inputTextArea cols="130" rows="2" value="{!labelReceived}"></apex:inputTextArea>
+                </apex:pageBlockSectionItem>                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <apex:pageBlock title="API Names"  rendered="{!displayApiNames}">
+            <apex:pageBlockTable value="{!apiNames}" var="val">
+                <apex:column value="{!val}" />
+            </apex:pageBlockTable>            
+        </apex:pageBlock>       
+    </apex:form>    
+</apex:page>

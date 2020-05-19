@@ -1,0 +1,13 @@
+<aura:component controller="CarTypeSearch" extends="c:Base" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="buttonLabel" type="String" default="Search button"  />  
+    <aura:attribute name="newLabel" type="String" default="New button"  /> 
+    <aura:attribute name="showNew" type="Boolean"  />
+    <aura:attribute name="carTypes" type="Car_Type__c[]"  />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"   />
+    <!--<aura:handler name="render" value="{!this}" action="{!c.handleRender}"   />-->
+    	Hello {!v.carTypes}
+    {!v.body}
+    
+  
+</aura:component>

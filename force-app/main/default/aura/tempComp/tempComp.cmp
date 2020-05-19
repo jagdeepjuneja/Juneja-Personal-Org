@@ -1,0 +1,30 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId"> <!--inherit recordId attribute-->
+<aura:attribute name="record" type="Object" />
+<aura:attribute name="simpleRecord" type="Object" />
+<aura:attribute name="recordError" type="String" />
+
+<aura:attribute name="sampleDate" type="Date" />
+
+<force:recordData aura:id="recordEditor"
+    layoutType="FULL"
+    recordId="{!v.recordId}"
+    targetError="{!v.recordError}"
+    targetRecord="{!v.record}"
+    targetFields ="{!v.simpleRecord}"
+    mode="EDIT" />
+    <!-- Display a lightning card with details about the record -->
+    <lightning:card iconName="standard:account" title="{!v.simpleRecord.Name}" >
+        <div class="slds-p-horizontal--small">
+            <p class="slds-text-heading--small">
+                <lightning:formattedDateTime title="Billing State" value="{!v.simpleRecord.Date_Time_test__c}" year="numeric" month="numeric" day="numeric" /></p>
+        </div>
+    </lightning:card>
+    <br/>
+    
+    <!-- Display Lightning Data Service errors, if any -->
+    <aura:if isTrue="{!not(empty(v.recordError))}">
+        <div class="recordError">
+            {!v.recordError}
+        </div>
+    </aura:if>
+</aura:component>

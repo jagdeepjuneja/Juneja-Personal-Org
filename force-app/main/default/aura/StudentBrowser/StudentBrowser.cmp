@@ -1,0 +1,18 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="studentList" type="Contact[]" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div class="slds-m-bottom_small">
+        <c:StudentBrowserForm />
+    </div>    
+    
+    <!--<lightning:tabset variant="scoped">
+        <lightning:tab label="Gallery" >
+            Photo Gallery of Student goes here.
+        </lightning:tab>
+    </lightning:tabset>-->
+    
+    <c:StudentTile selected="true" />
+    
+</aura:component>

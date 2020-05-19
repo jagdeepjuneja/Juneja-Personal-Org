@@ -1,0 +1,11 @@
+<aura:component >
+    <aura:attribute name="AccounttFields" type="Account"/>
+    <aura:attribute name="requiredFields" type="List" default="Country_Picklist__c,State_Picklist__c" />
+    <lightning:inputField fieldName="Country_Picklist__c" 
+                          aura:id="Country_Picklist__c" class="customRequired none" value="{!v.AccounttFields.Country_Picklist__c}"/>
+    
+    <lightning:inputField fieldName="State_Picklist__c" aura:id="State_Picklist__c" class="customRequired none" value="{!v.AccounttFields.State_Picklist__c}"/>
+    
+    <lightning:button label="button" onclick="{!c.callJS}"/>
+    
+</aura:component>

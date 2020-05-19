@@ -1,0 +1,4 @@
+<aura:component >
+    <c:ServiceComponentExample aura:id="childCompId" />
+    <lightning:button label="Call child" onclick="{!c.handleClick}" />
+</aura:component>

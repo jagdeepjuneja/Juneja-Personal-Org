@@ -1,0 +1,22 @@
+<aura:component controller="AttachmentUploadController">
+    
+    <aura:attribute name="fileList" type="Attachment[]"/>
+    <aura:attribute name="counter" type="Integer" default="0" />
+    
+    <lightning:input aura:id="fuploader"  type="file" name="file" label="Upload File" multiple="false"/>
+    
+    <a onclick="{!c.addFile}">
+        <lightning:icon iconName="utility:add" alternativeText="add"/>
+    </a>
+    
+    {!v.body}
+    
+    <lightning:button label="Submit" onclick="{!c.handleSave}" />
+    
+    
+    <aura:iteration items="{!v.fileList}" var="file" >
+        <br/>
+        {!file.Name}
+    </aura:iteration>
+    
+</aura:component>

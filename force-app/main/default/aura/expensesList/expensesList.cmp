@@ -1,0 +1,7 @@
+<aura:component >
+	<aura:attribute name="expenses" type="Expense__c[]"/>
+    Expense List
+    <aura:iteration items="{!v.expenses}" var="exp" >
+        <c:expenseItem expense="{!exp}" />
+    </aura:iteration>
+</aura:component>

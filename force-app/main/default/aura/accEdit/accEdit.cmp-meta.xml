@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuraDefinitionBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>43.0</apiVersion>
+    <description>Created as part of https://trailhead.salesforce.com/modules/lightning_data_service/units/lightning_data_service_manipulate_records challenge</description>
+</AuraDefinitionBundle>

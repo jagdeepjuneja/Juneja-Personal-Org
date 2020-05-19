@@ -1,0 +1,27 @@
+<apex:page standardController="Account" extensions="deleteContactController">
+  <apex:form id="formId">
+    <apex:pageBlock title="Account Details">
+      <apex:pageBlockSection title="Account">
+        <apex:outputField title="Name" value="{!Account.Name}"></apex:outputField>
+        <apex:outputField title="Phone" value="{!Account.Phone}"></apex:outputField>
+      </apex:pageBlockSection>
+    
+    
+    
+      <apex:pageBlockSection title="Related Contacts" rendered="{!conList.size>0}">
+        <apex:pageBlockTable value="{!conList}" var="con">
+          <apex:column value="{!con.Name}" />
+          <apex:column value="{!con.Phone}" />
+          <apex:column value="{!con.Email}" />
+          <apex:column >
+            <apex:commandButton value="Delete" action="{!deleteSelectedContact}" rerender="formId">
+              <apex:param name="conId"  value="{!con.Id}"  assignTo="{!conDeleteId}"></apex:param>
+            </apex:commandButton>
+          </apex:column>
+        </apex:pageBlockTable>
+      </apex:pageBlockSection>
+      
+      </apex:pageBlock>
+    
+  </apex:form>
+</apex:page>

@@ -1,0 +1,10 @@
+<apex:page controller="CommonController">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+                Count Is <apex:outputText value="{!count}" />
+                <apex:commandButton value="Previous Page" action="{!moveToPageOne}" />
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

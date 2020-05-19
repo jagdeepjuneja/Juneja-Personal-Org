@@ -1,0 +1,60 @@
+<apex:page controller="dropDownListController">
+  <apex:form id="formId">
+      
+      <apex:pageMessages id="showmsg"></apex:pageMessages>
+      
+      <apex:actionStatus id="loadingStatus">
+        <apex:facet name="start">
+            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                &nbsp;
+            </div>
+            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px;">
+                    <img src="/img/loading.gif" style="float: left; margin: 8px;" />
+                    <span style="display: inline-block; padding: 10px 0px;">Please Wait...</span>
+                </div>
+            </div>
+            </apex:facet>
+      </apex:actionStatus>
+      
+      <apex:pageBlock >
+          
+          <apex:pageBlockSection >
+             <apex:selectList size="1" value="{!selectedObjectApiName}" >
+               <apex:selectOptions value="{!objectList}"/>
+               <apex:actionSupport event="onchange" action="{!showFieldTable}" rerender="fieldTable,formId,showmsg" status="loadingStatus"/>
+            </apex:selectList> 
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockSection rendered="{!fieldTableWrapperList.size>0}" title="Field Table Schema" id="fieldTable">
+              <apex:pageBlockTable value="{!fieldTableWrapperList}" var="fieldWrapVar" >
+                
+                <apex:column headerValue="Field Name">
+                  <apex:outputText value="{!fieldWrapVar.fieldName}" />
+                </apex:column>
+                
+               <apex:column headerValue="Field Name">
+                  <apex:outputText value="{!fieldWrapVar.fieldDataType}" />
+                </apex:column>
+              
+               <apex:column headerValue="Selection?">
+                 <apex:inputCheckbox value="{!fieldWrapVar.selected}"/>
+               </apex:column>
+
+              </apex:pageBlockTable>
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockTable rendered="{!recordList.size>0}" value="{!recordList}" var="acc" id="recordTable">
+        	<apex:repeat value="{!selectedFields}" var="FieldLable">
+        	    <apex:column value="{!acc[FieldLable]}" />
+        	</apex:repeat>
+          </apex:pageBlockTable>
+          
+          <apex:pageBlockButtons location="bottom" title="Records Detail">
+            <apex:commandButton action="{!queryRecords}" value="Query"  status="loadingStatus" rerender="recordTable,formId"/>
+          </apex:pageBlockButtons>
+          
+      </apex:pageBlock>
+      
+  </apex:form>
+</apex:page>

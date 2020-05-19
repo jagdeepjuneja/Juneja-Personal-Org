@@ -1,0 +1,14 @@
+<apex:page standardController="Case">
+    <apex:form >
+        <script>
+        let strApiName ='Origin';
+        var check = '<apex'+':inputField value="'+'{'+'!'+'Case[\''+strApiName +'\']}" />';
+        console.log('test check is '+check);
+        $("#testAIF").append(check);
+        </script>
+        
+        <div id="testAIF">
+            
+        </div>
+    </apex:form>
+</apex:page>

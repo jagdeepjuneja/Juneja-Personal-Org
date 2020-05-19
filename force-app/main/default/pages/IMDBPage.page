@@ -1,0 +1,128 @@
+<apex:page controller="IMDBController" >
+  <apex:form id="formId">
+    <apex:pagemessages id="msg"/>
+    
+    <apex:actionStatus id="loadingStatus">
+        <apex:facet name="start">
+            <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+                &nbsp;
+            </div>
+            <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+                <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px;">
+                    <img src="/img/loading.gif" style="float: left; margin: 8px;" />
+                    <span style="display: inline-block; padding: 10px 0px;">Please Wait...</span>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    
+    <apex:pageBlock title="Bollywood Movies" id="pb">
+      <apex:pageBlockSection title="Movies List" collapsible="false">
+        <apex:pageBlockTable value="{!movieList}" var="movieVar" >
+                
+          <apex:column headerValue="Movie Name">
+            <apex:outputText value="{!movieVar.Name}" />
+          </apex:column>
+          
+          <apex:column headerValue="Year of Release">
+            <apex:outputText value="{!movieVar.Year_of_Release__c}" />
+          </apex:column>
+          
+          <apex:column headerValue="Producer Name">
+            <apex:outputText value="{!movieVar.Producer__r.Name}" />
+          </apex:column>
+        
+          <apex:column headerValue="Actors">
+           <apex:repeat value="{!movieVar.ActorMovies__r}" var="actorVar">
+             {!actorVar.Actor__r.Name},
+           </apex:repeat>
+          </apex:column>
+         
+          <apex:column headerValue="Action"> 
+           <apex:actionRegion >
+            <apex:commandButton value="Edit" action="{!openMovieEditSection}" status="loadingStatus" rerender="pb,formId">  
+    					<apex:param name="cid" value="{!movieVar.id}" assignTo="{!selectedMovieId}"/>  
+    				</apex:commandButton>  
+    				</apex:actionRegion> 
+		      </apex:column>
+         
+        </apex:pageBlockTable>
+      </apex:pageBlockSection>
+      
+        <apex:pageBlockButtons location="bottom"  rendered="{!showNewMovieButton}">
+          <apex:commandButton action="{!createNewMovieSection}" value="Create New Movie"  status="loadingStatus" rerender="formId"/>
+        </apex:pageBlockButtons>
+        
+      </apex:pageBLock>
+      
+      <apex:pageBlock title="Edit Movie" rendered="{!MovieEditSection}">
+        <apex:pageBlockSection title="Edit" collapsible="false">
+          <apex:inputField value="{!tempMovieVar.Name}" required="true"/>
+          <apex:inputField value="{!tempMovieVar.Year_of_Release__c}" />
+          <apex:inputField value="{!tempMovieVar.Plot__c}" />
+          <apex:inputField value="{!tempMovieVar.Producer__c}" />
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockButtons location="bottom" title="Records Detail" >
+          <apex:commandButton action="{!updateMovie}" value="Update"  status="loadingStatus" rerender="pb,formId"/>
+          <apex:actionRegion >
+          <apex:commandButton action="{!cancel}" value="Cancel"  status="loadingStatus" rerender="formId"/>
+          </apex:actionRegion> 
+        </apex:pageBlockButtons>
+      </apex:pageBLock>
+      
+      
+      <apex:pageBlock rendered="{!showMovieSection}" title="New Movie">
+      
+        <apex:pageBlockSection title="New Movie" collapsible="false" >
+          <apex:inputField value="{!movieVar.Name}" required="true"/>
+          <apex:inputField value="{!movieVar.Year_of_Release__c}" />
+          <apex:inputField value="{!movieVar.Plot__c}" />
+          <apex:inputField value="{!movieVar.Producer__c}" />
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockButtons location="bottom" title="Records Detail" rendered="{!showMovieSection}">
+          <apex:commandButton action="{!insertMovie}" value="Save"  status="loadingStatus" rerender="pb,formId"/>
+          <apex:actionRegion >
+            <apex:commandButton action="{!cancel}" value="Cancel"  status="loadingStatus" rerender="formId"/>
+            <apex:commandButton action="{!createProducerSection}" value="Create Produced Record"  status="loadingStatus" rerender="pb,formId"/>
+            <apex:commandButton action="{!createActorSection}" value="Create Actor Record"  status="loadingStatus" rerender="pb,formId"/>
+          </apex:actionRegion> 
+        </apex:pageBlockButtons>
+      </apex:pageBlock>
+    
+    
+    <apex:pageBlock rendered="{!producerSection}" title="New Producer">
+      <apex:pageBlockSection title="New Producer" collapsible="false" >
+        <apex:inputField value="{!prod.Name}" required="true"/>
+        <apex:inputField value="{!prod.Sex__c}" />
+        <apex:inputField value="{!prod.DOB__c}" />
+        <apex:inputField value="{!prod.Bio__c}" />
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockButtons location="bottom" title="Records Detail" >
+        <apex:commandButton action="{!insertProducer}" value="Save"  status="loadingStatus" rerender="pb,formId"/>
+        <apex:actionRegion >
+        <apex:commandButton action="{!cancel}" value="Cancel"  status="loadingStatus" rerender="formId"/>
+        </apex:actionRegion> 
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+    
+    <apex:pageBlock rendered="{!showActorSection}" title="New Actor">
+      <apex:pageBlockSection title="New Actor" collapsible="false" >
+        <apex:inputField value="{!actor.Name}" required="true"/>
+        <apex:inputField value="{!actor.Sex__c}" />
+        <apex:inputField value="{!actor.DOB__c}" />
+        <apex:inputField value="{!actor.Bio__c}" />
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockButtons location="bottom" title="Records Detail" >
+        <apex:commandButton action="{!insertActor}" value="Save"  status="loadingStatus" rerender="pb,formId"/>
+        <apex:actionRegion >
+        <apex:commandButton action="{!cancel}" value="Cancel"  status="loadingStatus" rerender="formId"/>
+        </apex:actionRegion> 
+      </apex:pageBlockButtons>
+    </apex:pageBlock>
+    
+  </apex:form>
+</apex:page>

@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" controller="ApiCallLightningComponent" access="global" >
+    <aura:attribute name="title" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="slds-m-around_x-small">
+        <lightning:button variant="brand" label="Inject component" iconName="action:apex" iconPosition="left" onclick="{!c.doHandleClick }" /></div>
+    <aura:attribute name="cmpName" type="String" />
+    
+    
+    <div aura:id="ModalDialogPlaceholder" />
+    *** {!v.cmpName}***
+    
+    $Label.c.tempLabel	
+    
+    ***
+    {!v.body}
+    
+    <lightning:input class="slds-m-bottom_large" name="title" label="Title" value="{! v.title }"/>
+    
+</aura:component>

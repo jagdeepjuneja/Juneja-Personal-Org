@@ -1,0 +1,15 @@
+<aura:component implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <p class="paragraph1">Hello world First Ashish Choudhary 1.</p>
+    
+    <div>
+        <p class="paragraph2">Hello world First Ashish Choudhary 2.</p>
+    </div>
+    
+    <div>
+        <div>
+            <p class="paragraph3">Hello world First Ashish Choudhary 3.</p>
+        </div>
+    </div>
+    <button>Html button</button>
+    <lightning:button variant="brand" label="Lightning button"  />
+</aura:component>

@@ -1,0 +1,30 @@
+<aura:component >
+    <div class="c-container,slds-col slds-size_12-of-12">
+        <lightning:layout verticalAlign="stretch" multipleRows="true" class="slds-grid_vertical-stretch">
+            <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                1
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                2
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                3
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="auto" padding="around-small" class="custom-box">
+                4
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+    <div class="slds-grid slds-wrap">
+  <div class="slds-col slds-size_12-of-12">
+    <span>1</span>
+  </div>
+  <div class="slds-col slds-size_5-of-12">
+    <span>1</span>
+  </div>
+  <div class="slds-col slds-size_12-of-12">
+    <span>1</span>
+  </div>
+</div>
+</aura:component>

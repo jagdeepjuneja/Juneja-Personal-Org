@@ -1,0 +1,28 @@
+<apex:page controller="MyTestDynamicSObject">
+  
+  <script>
+    function checkAccount()
+    {
+        alert('Entered Javascript') ;
+        CallApexMethod() ;
+    }
+</script>
+  
+  
+    <apex:form id="theForm">
+      
+      <apex:actionFunction name="CallApexMethod" action="{!myActionInController}" />
+      
+        <apex:pageBlock mode="edit">
+            <apex:pageMessages />
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton onclick="checkAccount()" action="{!saveRecord}" value="Save" reRender="theForm" status="loading" />
+                <apex:actionStatus id="status" startText="(loading...)"></apex:actionStatus>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:inputField value="{!sObjRecord['LastName']}" required="false" /><br />
+                <apex:inputField value="{!sObjRecord['AccountId']}" required="false" /><br /><br />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

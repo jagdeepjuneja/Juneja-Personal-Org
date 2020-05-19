@@ -1,0 +1,6 @@
+<apex:page cache="true"  standardController="Contact" recordsetVar="contacts" contentType="application/octet-stream#MemberDirectory.csv" showHeader="false" sidebar="false" language="en-US">
+    "Salutation","First Name","Last Name","Title","Email","Phone"
+    <apex:repeat value="{!contacts}" var="item">
+        "{!item.Salutation}","{!item.firstname}","{!item.lastname}","{!item.Title}","{!item.email}","{!item.mobilephone}"
+    </apex:repeat>
+</apex:page>

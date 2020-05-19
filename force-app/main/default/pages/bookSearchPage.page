@@ -1,0 +1,66 @@
+<apex:page controller="BookSearchController">
+    
+  <apex:form id="formId">
+      <apex:pageBlock title="Bhai Gurdas Library">
+          
+          <apex:pageBlockSection title="Reading List">
+             <apex:selectList size="1" value="{!selectedReadingListName}" >
+               <apex:selectOptions value="{!readingList}"/>
+            </apex:selectList> 
+          </apex:pageBlockSection>
+          
+          
+          <apex:pageBlockSection title="Search books based on the below fields" collapsible="false">
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="Author Name"/>
+                  <apex:inputText value="{!author}" />
+              </apex:pageBlockSectionItem>
+              
+              <apex:pageBlockSectionItem />
+              
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="Book Title"/>
+                  <apex:inputText value="{!title}" />
+              </apex:pageBlockSectionItem>
+              
+              <apex:pageBlockSectionItem />
+              
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel value="ISBN Code"/>
+                  <apex:inputText value="{!isbnCode}" />
+              </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>
+          
+          
+          
+         <apex:pageBlockSection rendered="{!bookRecordsWrapperList.size>0}" title="Book Details" id="bookTable">
+              <apex:pageBlockTable value="{!bookRecordsWrapperList}" var="bookWrapVar" >
+                
+                <apex:column headerValue="Book Title">
+                  <apex:outputText value="{!bookWrapVar.title}" />
+                </apex:column>
+                
+                <apex:column headerValue="Author">
+                  <apex:outputText value="{!bookWrapVar.Author}" />
+                </apex:column>
+                
+                <apex:column headerValue="publisher">
+                  <apex:outputText value="{!bookWrapVar.publisher}" />
+                </apex:column>
+                
+               <!--<apex:column headerValue="Select Book">
+                 <apex:inputCheckbox value="{!bookWrapVar.selected}"/>
+               </apex:column>-->
+
+              </apex:pageBlockTable>
+          </apex:pageBlockSection>
+        
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton value="Search" action="{!bookSearch}" rerender="bookTable,formId"/>
+          </apex:pageBlockButtons>
+          
+      </apex:pageBlock>
+  
+  </apex:form>  
+  
+</apex:page>

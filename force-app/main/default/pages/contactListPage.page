@@ -1,0 +1,47 @@
+<apex:page controller="ContactListController2">
+  <apex:form id="formId">
+      <apex:pageBlock >
+          <apex:pageBlockSection >
+              <apex:pageBlockSectionItem >
+                  Select Account <apex:inputField value="{!con.AccountId}"></apex:inputField>
+              </apex:pageBlockSectionItem>
+          </apex:pageBlockSection>
+          <apex:pageBlockButtons location="bottom">
+              <apex:commandButton value="Get Contact" action="{!getContacts}" rerender="conTableId,formId,noContactFoundId"></apex:commandButton>
+          </apex:pageBlockButtons>  
+      </apex:pageBlock>
+      
+      
+      <apex:pageBlock >
+          
+          <apex:outputPanel rendered="{!conList.size=0}">
+             Either No Account selected OR No Contacts found for above selected Account.
+          </apex:outputPanel>
+          
+          <apex:pageBlockTable rendered="{!conList.size>0}" value="{!conList}" var="con1" id="conTableId">
+                <apex:column >  
+					<apex:param name="selectedConId" value="{!con1.id}"/>  
+				</apex:column>
+                
+                <apex:column headerValue="Contact Name">
+                    <apex:outputText value="{!con1.Name}" />
+                </apex:column>
+                
+                <apex:column headerValue="Email">
+                    <apex:outputText value="{!con1.Email}" />
+                </apex:column>
+                
+                <apex:column headerValue="Action">  
+                    <apex:commandLink value="Edit" action="{!editContact}">  
+    					<apex:param name="cid" value="{!con1.id}" assignTo="{!editContactId}"/>  
+    				</apex:commandLink>  
+    						&nbsp;&nbsp;&nbsp;&nbsp;  
+    				<apex:commandLink value="Delete" action="{!deleteContact}">  
+    					<apex:param name="cid" value="{!con1.id}" assignTo="{!deleteContactId}"/>  
+    				</apex:commandLink>
+		        </apex:column>
+          </apex:pageBlockTable>
+              
+      </apex:pageBlock>
+  </apex:form>
+</apex:page>

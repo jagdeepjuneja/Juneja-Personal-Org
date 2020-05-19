@@ -1,0 +1,14 @@
+<apex:page controller="fileUploadController2" action="{!createDemoObjectRecord}">
+
+
+  <script>
+    $(‘#publisherAttachContentPost’).trigger(‘click’);
+    
+  </script>
+
+  id is {!obj.Id}
+  <chatter:feed entityId="{!obj.Id}" />
+  
+  
+  <!--<chatter:feed entityId="{!$CurrentPage.parameters.Id}" />-->
+</apex:page>

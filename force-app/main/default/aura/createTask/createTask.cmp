@@ -1,0 +1,19 @@
+<aura:component controller="createTaskApexController">
+    <aura:attribute name="task" type="Task" default="{'sobjectType':'Task'}" />
+    
+    <ui:inputText aura:id="subject" label="Subject" value="{!v.task.subject}" required="true"/>
+    <br></br>
+    <ui:inputSelect aura:Id="priority" multiple="false" label="Priority" value="{!v.task.priority}">
+        <ui:inputSelectOption text="High" label="High" value="true"/>
+        <ui:inputSelectOption text="Normal" label="Normal" />
+        <ui:inputSelectOption text="Low" label="Low"/>
+	</ui:inputSelect><br></br>
+    <ui:inputSelect aura:Id="type" multiple="false" label="Type" value="{!v.task.type}">
+        <ui:inputSelectOption text="Call" label="Call" value="true"/>
+        <ui:inputSelectOption text="Meeting" label="Meeting" />
+        <ui:inputSelectOption text="Other" label="Other"/>
+        <ui:inputSelectOption text="Email" label="Email"/>
+	</ui:inputSelect><br></br>
+    <ui:inputTextArea aura:id="description" value="{!v.task.description}" label="Description" />
+    <ui:button label="Create Task" press="{!c.createTask}" />
+</aura:component>

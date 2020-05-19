@@ -1,0 +1,7 @@
+<apex:page Controller="ApexDetailTagController" >
+    <apex:form >
+        <h1>Below is the Account detail</h1>
+        <apex:detail subject="{!AccountId}" relatedList="true"/>
+    </apex:form>
+
+</apex:page>

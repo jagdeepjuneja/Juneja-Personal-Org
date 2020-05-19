@@ -1,0 +1,23 @@
+<aura:component controller="childContactApexController" 
+                implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="contacts" type="Contact[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="offset" type="Integer" default="0" />
+
+    <div aura:id="mainDiv" style="max-height:50px;" class="slds-scrollable--y" >
+       <table >
+           <aura:iteration items="{!v.contacts}" var="contact">
+               <tr>
+                   <td >
+                       <ui:outputText value="{!contact.Name}" />        
+                   </td>
+               </tr>
+               <tr>
+                   <td >
+                   </td>
+               </tr>
+           </aura:iteration>
+       </table>
+   </div>
+</aura:component>

@@ -1,0 +1,44 @@
+<!--
+Created By: Jagdeep Juneja
+Created On: 04/14/2017
+Purpose: Project- SPR Premium Feature.(This page will show tasks that are archieved i.e. tasks that are created before 1 year and to export 
+          all tasks that is on current page to excel file on click of button.)
+--------------------------------------------------------------------------
+-->
+<apex:page controller="ArchievedTaskController" contentType="application/vnd.ms-excel#SalesForceExport.xls"> 
+  <apex:form id="form">   
+    
+    
+    <apex:actionStatus startText="Loading..."   id="loadingStatus" >
+      <apex:facet name="start" >
+        <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.75; z-index: 1000; background-color: white;">
+          &nbsp;
+        </div>
+        <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 30% 50%">
+          <img src="/img/loading.gif" />
+        </div>
+        <img src="/img/loading.gif" />                    
+      </apex:facet>
+    </apex:actionStatus>
+    
+    <apex:pageBlock title="Archieved Tasks " >      
+    
+      <apex:pageBlockButtons >            
+        <apex:commandButton value="First" action="{!first}" disabled="{!DisablePrevious}" status="loadingStatus" rerender="form"/>
+        <apex:commandButton value="Previous" action="{!previous}" disabled="{!DisablePrevious}" status="loadingStatus" rerender="form"/>
+        <apex:commandButton value="Next" action="{!next}" disabled="{!DisableNext}" status="loadingStatus" rerender="form"/>
+        <apex:commandButton value="Last" action="{!last}" disabled="{!DisableNext}" status="loadingStatus" rerender="form"/>
+      </apex:pageBlockButtons>   
+      
+      <apex:pageBlockTable value="{!taskListToShow}" var="t">
+        <apex:column headerValue="Subject" >
+          <apex:outputLink value="/{!t.Id}">{!t.subject}</apex:outputLink>
+        </apex:column>
+        <apex:column value="{!t.AccountId}" />
+        <apex:column value="{!t.Status}"/>
+        <apex:column value="{!t.Description}"/>                  
+      </apex:pageBlockTable>     
+    
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

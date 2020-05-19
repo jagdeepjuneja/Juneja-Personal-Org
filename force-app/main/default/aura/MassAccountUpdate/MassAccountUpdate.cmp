@@ -1,0 +1,134 @@
+<aura:component implements="force:appHostable"  controller="MassAccountUpdateController">
+    <ltng:require styles="{! $Resource.sldsSS + '/assets/styles/salesforce-lightning-design-system.css'}"/>
+    <aura:attribute name="accountList" type="Account[]"/>
+    <aura:attribute name="mycolumns" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="isSelectAll" type="boolean" default="false"/>
+    
+    <aura:attribute name="showIndustry" type="boolean" default="true"/>
+    <aura:attribute name="showSource" type="boolean" default="true"/>
+    <aura:attribute name="showFilterButton" type="boolean" default="false"/>
+    <aura:attribute name="showResetButton" type="boolean" default="false"/>
+    
+    <aura:attribute name="typeArray" type="list"></aura:attribute>
+    <aura:attribute name="industryArray" type="list"></aura:attribute>
+    <aura:attribute name="sourceArray" type="list"></aura:attribute>
+    
+    <aura:attribute name="inactiveAccMap" type="Map" default="{}"/>
+    
+    <aura:attribute name="selectedType" type="String"/>
+    <aura:attribute name="selectedIndustry" type="String"/>
+    <aura:attribute name="selectedSource" type="String"/>
+    
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    
+    <!--loading spinner start-->
+    <aura:if isTrue="{!v.spinner}">
+        <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+                <span class="slds-assistive-text">Loading...</span>
+                <div class="slds-spinner__dot-a"></div>
+                <div class="slds-spinner__dot-b"></div>
+            </div>
+        </div>
+    </aura:if>
+    <!-- Loading spinner end--> 
+    <div class="slds-grid">
+        <div class="slds-col slds-size_1-of-5" style = "max-width:50%;">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-theme_default">
+                    <div class="slds-col">
+                        <lightning:select aura:id="InputAccountType"  onchange="{!c.onAccTypePicklistChange}"  name="InputAccountType" label="Account Type" >
+                            <aura:iteration items="{!v.typeArray}" var="item" >
+                                <option value="{!item.value}" label="{!item.label}"  />
+                            </aura:iteration>
+                        </lightning:select>
+                    </div>
+                    
+                    <div class="slds-col">
+                        
+                        <aura:if isTrue="{!v.showIndustry}">
+                            <lightning:select aura:id="InputIndustryType"  onchange="{!c.onIndustryPicklistChange}"  name="InputIndustryType" label="Industry" >
+                                <aura:iteration items="{!v.industryArray}" var="item" >
+                                    <option value="{!item.value}" label="{!item.label}"  />
+                                </aura:iteration>
+                            </lightning:select>
+                        </aura:if>
+                    </div>
+                    
+                    <div class="slds-col">
+                        
+                        
+                        <aura:if isTrue="{!v.showSource}">
+                            <lightning:select aura:id="InputSourceType"  onchange="{!c.onSourcePicklistChange}"  name="InputSourceType" label="Source" >
+                                <aura:iteration items="{!v.sourceArray}" var="item" >
+                                    <option value="{!item.value}" label="{!item.label}"  />
+                                </aura:iteration>
+                            </lightning:select>
+                        </aura:if>
+                    </div>
+                    <br/>
+                    <div class="slds-button-group" role="group">
+                        <button class="slds-button_brand" label="Activate Accounts" onclick ="{!c.activateAccounts }">Activate Accounts</button>
+                        <aura:if isTrue="{!v.showFilterButton}" >
+                            <button class="slds-button_brand" label="Filter" onclick ="{!c.filterAccounts }">Filter</button>
+                        </aura:if>
+                        <aura:if isTrue="{!v.showResetButton}" >
+                            <button class="slds-button_brand" label="Reset" onclick ="{!c.resetFilters }">Reset</button>
+                        </aura:if>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <div class="slds-col slds-size_4-of-5" style="overflow-y:auto;max-height:750px">
+            <table  class="slds-table slds-table--bordered slds-table--striped">
+                <thead>
+                    <tr>
+                        <th>           
+                            <label class="slds-checkbox">
+                                <ui:inputCheckbox value="{!v.isSelectAll}" change="{!c.handleSelectAllAccounts}" aura:id="selectAll"/>
+                                <span class="slds-checkbox--faux" />
+                                <span class="slds-form-element__label"></span>
+                            </label>
+                        </th>
+                        <th scope="col"><span class="slds-text-heading--medium">Account Name</span></th>
+                        <th scope="col"><span class="slds-text-heading--medium">Annual Revenue</span></th>
+                        <th scope="col"><span class="slds-text-heading--medium">Active</span></th>
+                        <th scope="col"><span class="slds-text-heading--medium">Website</span></th>
+                        <th scope="col"><span class="slds-text-heading--medium">Type</span></th>
+                        <th scope="col"><span class="slds-text-heading--medium">Industry</span></th>
+                        <th scope="col"><span class="slds-text-heading--medium">Account Source</span></th>
+                    </tr>
+                </thead>
+               
+                <tbody>
+                    <aura:iteration items="{!v.accountList}" var="acc">
+                        <tr>
+                            <td>
+                                <label class="slds-checkbox">
+                                    <ui:inputCheckbox aura:id="checkAccount" value="" text="{!acc.Id}"/>
+                                    <span class="slds-checkbox--faux" />
+                                    <span class="slds-form-element__label"></span>
+                                </label>
+                            </td>  
+                            <td>
+                                <a href="{!'/one/one.app?#/sObject/'+ acc.Id + '/view'}" target="_blank">{! acc.Name }</a>
+                            </td>
+                            <td>{!acc.AnnualRevenue}</td>
+                            <td>{!acc.Active__c}</td>
+                            <td>
+                                <a href="{! acc.Website }" target="_blank">{! acc.Website }</a>
+                            </td>
+                            <td>{!acc.Type}</td>
+                            <td>{!acc.Industry}</td>
+                            <td>{!acc.AccountSource}</td>
+                        </tr>
+                        
+                    </aura:iteration>
+                </tbody>
+            </table>
+   </div>
+  </div>
+    
+</aura:component>

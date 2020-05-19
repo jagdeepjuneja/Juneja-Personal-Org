@@ -1,0 +1,6 @@
+<aura:component >
+	<aura:method name="add" action="{!c.addLogic}">
+        <aura:attribute name="x" type="Integer" required="true" />
+        <aura:attribute name="y" type="Integer" required="true" />
+    </aura:method>
+</aura:component>

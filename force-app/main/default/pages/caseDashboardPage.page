@@ -1,0 +1,25 @@
+<apex:page standardController="Case" recordSetVar="cases">
+  
+  <apex:outputPanel >                      
+	<apex:actionStatus id="loadingStatus" >
+	  <apex:facet name="start" >
+		<img src="/img/loading.gif" />                    
+	  </apex:facet>
+	</apex:actionStatus>
+  </apex:outputPanel> 
+  
+  <apex:form id="formId">
+    <apex:selectList size="1" value="{!filterId}" >
+        <apex:selectOptions value="{!listViewOptions}"/>
+        <apex:actionSupport event="onchange"  rerender="pb" status="loadingStatus"/>
+    </apex:selectList>
+    
+    <apex:pageBlock id="pb">
+      <apex:pageBlockSection >
+        <apex:dataList value="{!cases}" var="cas" >
+          {!cas.subject}
+        </apex:dataList>
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

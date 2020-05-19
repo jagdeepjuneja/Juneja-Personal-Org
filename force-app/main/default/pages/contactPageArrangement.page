@@ -1,0 +1,35 @@
+<apex:page controller="contactController">
+  <apex:form >
+  <apex:pageBlock title="Search Criteria">
+      
+      <apex:pageBlockSection columns="4">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Account Name"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Billing Country"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Contact Name"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Account Type"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField value="{!con.Account.Name}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField value="{!con.Account.BillingCountry}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField value="{!con.FirstName}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:inputField value="{!con.Account.Type}"/>
+                </apex:pageBlockSectionItem>
+                
+      </apex:pageBlockSection>
+      
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

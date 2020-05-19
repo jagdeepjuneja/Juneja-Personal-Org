@@ -1,0 +1,52 @@
+<apex:page controller="DetailPageController" >
+  <apex:form id="formId">
+    <apex:pagemessages id="msg"/>
+    
+    <apex:outputPanel >                      
+  	  <apex:actionStatus id="loadingStatus">
+        <apex:facet name="start">
+          <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.25; z-index: 1000; background-color: black;">
+              &nbsp;
+          </div>
+          <div style="position: fixed; left: 0; top: 0; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+              <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px;">
+                  <img src="/img/loading.gif" style="float: left; margin: 8px;" />
+                  <span style="display: inline-block; padding: 10px 0px;">Please Wait...</span>
+              </div>
+          </div>
+        </apex:facet>
+      </apex:actionStatus>
+    </apex:outputPanel> 
+        
+    <apex:pageBlock title="Visit any record" id="pb">
+      <apex:pageBlockSection title="Select Object" collapsible="false">
+        
+        <apex:selectRadio layout="pageDirection" value="{!selectedRadio}" >
+            <apex:selectOption itemLabel="By Label" itemvalue="By Label" />
+            <apex:selectOption itemLabel="By Api" itemvalue="By Api" />
+            <apex:actionSupport event="onchange" action="{!radioButtonChanged}" rerender="labelValues,apiValues,pb" status="loadingStatus"/>
+        </apex:selectRadio><p/>
+        
+        <apex:selectList value="{!selectedOption}" multiselect="false" size="1" id="labelValues" rendered="{!showLabel}" > 
+            <apex:selectOptions value="{!options}"/>
+            <apex:actionSupport event="onchange" action="{!onPicklistValueChange}" rerender="servieDeptProductNumberId,mktFruPnId" />
+        </apex:selectList>
+        
+        <apex:selectList value="{!selectedOption}" multiselect="false" size="1" id="apiValues" rendered="{!showApi}">
+            <apex:selectOptions value="{!options2}"/>
+            <apex:actionSupport event="onchange" action="{!onPicklistValueChange}" rerender="servieDeptProductNumberId,mktFruPnId" />
+        </apex:selectList>
+        
+      </apex:pageBlockSection>
+      
+      <apex:pageBlockButtons location="bottom">
+          <apex:commandLink target="_blank" styleClass="btn" style="text-decoration:none;padding:4px;" 
+            value="Record Home page" action="{!recHomePage}"/>
+              
+          <apex:commandLink target="_blank" styleClass="btn" style="text-decoration:none;padding:4px;" 
+            value="New Record page" action="{!recNewPage}"/>  
+      </apex:pageBlockButtons>  
+    
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

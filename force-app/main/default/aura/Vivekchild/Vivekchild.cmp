@@ -1,0 +1,3 @@
+<aura:component extends="c:VivekBase">
+	<p class="class1">hello</p>
+</aura:component>

@@ -1,0 +1,35 @@
+<aura:component implements="force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes" controller="oppSearchController">  
+    <aura:attribute name="opportunities" type="Opportunity[]"/>
+    <aura:attribute name="opp" type="Opportunity"/>
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="showtbl" type="boolean" default="false"/>
+    <ui:inputText aura:id="nameopp" label="Opportunity Stage" value="" required="true"/>
+    <ui:inputText aura:id="amntopp" label="Opportunity Amount >" value="" required="false"/>
+    <ui:button label="Get Opportunities" press="{!c.getOpps}"/>
+    
+    <aura:if isTrue="{!v.showtbl}">    <span class="ligtn-button" style="white-space: pre;"> </span>
+        <table>
+            <thead>
+                <tr>
+                    <th><strong> Name </strong></th>
+                    <th> <strong>  Stage </strong> </th>
+                    <th> <strong>  Amount </strong> </th>                   
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration var="opp" items="{!v.opportunities}">                   
+                    <tr>
+                        <td><a data-record="{!opp.Id}" onclick="{!c.navigateToRecord}">{!opp.Name}</a>
+                        </td>
+                        <td>{!opp.StageName}</td>
+                        <td>{!opp.Amount}</td>
+                        <td>{!opp.Id}</td>
+                        
+                        
+                        
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </aura:if>
+</aura:component>

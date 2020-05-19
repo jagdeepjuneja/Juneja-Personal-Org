@@ -1,0 +1,21 @@
+<aura:component >
+    <aura:attribute name="student" type="COntact" access="public" 
+                    default="{'Name':'Jagdeep',
+                              'PhotoURL': 'services/images/photo/0056F000006d3CU'}" />
+    <aura:attribute name="selected" type="boolean" default="false" />
+    
+    
+    
+    <lightning:tabset variant="scoped">
+        <lightning:tab label="Gallery" >
+            <!--Photo Gallery of Student goes here.-->
+            <lightning:button variant="neutral" class="{!v.selected ? 'tile selected' :'tile'}">
+                <div class="lower-third">
+                    <div class="innertile" style="{# 'background-image:url('+v.student.PhotoURL+')'}"></div>
+                    <h1 class="truncate">{#v.student.Name}</h1>
+                    {!v.student.PhotoURL}
+                </div>
+            </lightning:button>
+        </lightning:tab>
+    </lightning:tabset>
+</aura:component>

@@ -1,0 +1,48 @@
+<aura:component extends="c:Base">
+    <aura:attribute type="Boat__c" name="boat" access="public" />
+    <aura:attribute type="BoatReview__c" name="boatReview" access="public" />
+    <aura:attribute type="String" name="recordError" access="private" />
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:registerEvent name="BoatReviewAdded" type="c:BoatReviewAdded" />
+    
+    <force:recordData aura:id="service"
+                      mode="EDIT"
+                      targetFields="{!v.boatReview}"
+                      targetError = "{!v.recordError}"
+                      recordUpdated ="{!c.onRecordUpdated}"
+                      fields="Id, Name, Comment__c, Boat__c"
+                      />
+    
+    
+    
+    <lightning:layout multipleRows="true">
+        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12"
+                              largeDeviceSize="12" padding="around-small">
+            <lightning:input name="title" label="Title" value="{!v.boatReview.Name}" />
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12"
+                              largeDeviceSize="12" padding="around-small">
+            <label class="slds-form-element__label" for="input-id-01">Description</label>
+            <lightning:inputRichText  label="Title" value="{!v.boatReview.Comment__c}" disabledCategories="FORMAT_FONT"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem size="12" padding="around-small">
+            <label class="slds-form-element__label" for="input-id-01">Rating</label>
+            <ul class="slds-post__footer-actions-list slds-list_horizontal">
+                <li class="slds-col slds-item slds-m-right_medium">
+                    <c:FiveStarRating value="{!v.boatReview.Rating__c}" />
+                    
+                </li>
+            </ul>
+        </lightning:layoutItem>
+        
+        <lightning:layoutItem size="12" smallDeviceSize="12" mediumDeviceSize="12"
+                              largeDeviceSize="12" padding="around-small">
+            <lightning:button label="Add Experience" iconName="utility:Save" onclick="{!c.onSave}" />
+        </lightning:layoutItem>
+        
+    </lightning:layout>
+    
+</aura:component>

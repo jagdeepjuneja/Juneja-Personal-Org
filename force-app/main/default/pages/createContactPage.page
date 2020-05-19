@@ -1,0 +1,28 @@
+<apex:page standardController="Contact" extensions="createContactController">
+  <apex:form id="formId">
+      <apex:pagemessages id="msg"/>
+        
+
+    <apex:pageBlock title="Contact Details">
+        
+      <apex:pageBlockSection title="Contact">
+          <apex:inputField value="{!con.FirstName}" />
+        <apex:inputField value="{!con.LastName}" required="false"/>
+      </apex:pageBlockSection>
+    
+    <apex:outputPanel id="companies_discussed">                               
+        <apex:inputHidden value="{!companyDiscussed}" id="companyDiscussedId"/> 
+        <c:CustomLookup objectName="Company__c" fieldAPI="Name" fieldToPopulateId="{!$Component.companyDiscussedId}" fieldSetName="company_search_result"/>
+    </apex:outputPanel>
+
+    
+      
+      <apex:commandButton value="Save" action="{!save}" />
+        
+      
+      
+      
+    </apex:pageBlock>
+    
+  </apex:form>
+</apex:page>
